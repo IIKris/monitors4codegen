@@ -455,9 +455,6 @@ class LanguageServer:
                 }
             )
 
-        ret = multilspy_types.Location(response)
-
-        '''
         ret: List[multilspy_types.Location] = []
         if isinstance(response, list):
             # response is either of type Location[] or LocationLink[]
@@ -501,7 +498,6 @@ class LanguageServer:
             ret.append(multilspy_types.Location(**new_item))
         else:
             assert False, f"Unexpected response from Language Server: {response}"
-        '''
 
         return ret
 
@@ -833,7 +829,7 @@ class SyncLanguageServer:
         return result
 
 
-    def request_declaration(self, file_path: str, line: int, column: int) -> multilspy_types.Location:
+    def request_declaration(self, file_path: str, line: int, column: int) -> List[multilspy_types.Location]:
         result = asyncio.run_coroutine_threadsafe(
             self.language_server.request_declaration(file_path, line, column), self.loop
         ).result()
