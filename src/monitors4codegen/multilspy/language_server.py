@@ -832,6 +832,13 @@ class SyncLanguageServer:
         ).result()
         return result
 
+
+    def request_declaration(self, file_path: str, line: int, column: int) -> multilspy_types.Location:
+        result = asyncio.run_coroutine_threadsafe(
+            self.language_server.request_declaration(file_path, line, column), self.loop
+        ).result()
+        return result
+
     def request_references(self, file_path: str, line: int, column: int) -> List[multilspy_types.Location]:
         """
         Raise a [textDocument/references](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_references) request to the Language Server
