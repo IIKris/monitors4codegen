@@ -15,6 +15,7 @@ class Language(str, Enum):
     RUST = "rust"
     JAVA = "java"
     C = "c"
+    CPP = "cpp"
 
     def __str__(self) -> str:
         return self.value

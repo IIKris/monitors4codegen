@@ -98,6 +98,11 @@ class LanguageServer:
                 ClangdServer,
             )
             return ClangdServer(config, logger, repository_root_path)
+        elif config.code_language == Language.CPP:
+            from monitors4codegen.multilspy.language_servers.ccls_language.ccls_server import (
+                CclsServer,
+            )
+            return CclsServer(config, logger, repository_root_path)
         else:
             logger.log(f"Language {config.code_language} is not supported", logging.ERROR)
             raise MultilspyException(f"Language {config.code_language} is not supported")
