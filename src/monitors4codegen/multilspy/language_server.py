@@ -423,7 +423,7 @@ class LanguageServer:
         self, relative_file_path: str, line: int, column: int
     ) -> List[multilspy_types.Location]:
         """
-        Raise a [textDocument/declaration](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_declaration) request to the Language Server
+        Raise a [textDocument/declaration](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_implementation) request to the Language Server
 
         :param relative_file_path: The relative path of the file that has the symbol for which definition should be looked up
         :param line: The line number of the symbol
@@ -441,7 +441,7 @@ class LanguageServer:
 
         with self.open_file(relative_file_path):
             # sending request to the language server and waiting for response
-            response = await self.server.send.declaration(
+            response = await self.server.send.implementation(
                 {
                     LSPConstants.TEXT_DOCUMENT: {
                         LSPConstants.URI: pathlib.Path(
